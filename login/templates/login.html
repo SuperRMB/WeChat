@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+
+    <style>
+        .login_bg{
+            position: relative;
+            border: 1px solid red;
+            width: 600px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        .title{
+            position: absolute;
+            font-size: 40px;
+            color: black;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+            width: 200px;
+            left: 50%;
+            margin-left: -100px;
+            top: 10px;
+        }
+
+        .content{
+            position:absolute;
+            top: 100px;
+            width: 250px;
+            left: 50%;
+            margin-left: -125px;
+        }
+
+        label{
+            width: 200px;
+            align-content: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login_bg">
+
+        <div class="title">登录/注册</div>
+
+        <div class="content">
+
+            <form action="mobile_verification/" method="post">
+                {% csrf_token %}
+                <label>用户名：</label>
+                <input type="text" placeholder="请输入用户名" name="username">
+                <br>
+                <label>密户码：</label>
+                <input type="password" placeholder="请输入密码" name="password">
+                <br>
+                <input type="submit" value="登录/注册">
+            </form>
+
+        </div>
+
+
+    </div>
+
+</body>
+</html>
