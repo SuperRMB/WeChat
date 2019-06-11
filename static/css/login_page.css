@@ -1,0 +1,64 @@
+.login_bg {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    padding: 24px 24px;
+    background-color: white;
+    top: 100px;
+}
+
+.title {
+    font-size: 16px;
+    color: black;
+    font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+    width: 200px;
+    font-weight: 700;
+}
+
+.content {
+
+}
+
+label {
+    display: block;
+    width: 200px;
+    align-content: left;
+    margin-top: 15px;
+}
+
+input {
+    height: 20px;
+    border: 1px solid gray;
+    border-radius: 4px;
+    margin-top: 5px;
+    padding-left: 5px;
+}
+
+button {
+    margin-top: 20px;
+    width: 100px;
+    border-radius: 4px;
+    height: 30px;
+}
+
+.bg {
+    background-image: url("/static/img/timg.jpg");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-width: 1000px;
+    z-index: -10;
+    zoom: 1;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+}
+
+span{
+    color: red;
+    font-size: 12px;
+}

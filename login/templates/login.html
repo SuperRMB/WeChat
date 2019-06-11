@@ -3,64 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
-
-    <style>
-        .login_bg{
-            position: relative;
-            border: 1px solid red;
-            width: 600px;
-            height: 400px;
-            margin: 0 auto;
-        }
-
-        .title{
-            position: absolute;
-            font-size: 40px;
-            color: black;
-            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
-            width: 200px;
-            left: 50%;
-            margin-left: -100px;
-            top: 10px;
-        }
-
-        .content{
-            position:absolute;
-            top: 100px;
-            width: 250px;
-            left: 50%;
-            margin-left: -125px;
-        }
-
-        label{
-            width: 200px;
-            align-content: left;
-        }
-    </style>
+    <link type="text/css" href="/static/css/login_page.css" rel="stylesheet">
 </head>
 <body>
 
+<div class="bg">
     <div class="login_bg">
 
-        <div class="title">登录/注册</div>
+        <div class="title">密码登录</div>
 
         <div class="content">
 
             <form action="mobile_verification/" method="post">
                 {% csrf_token %}
-                <label>用户名：</label>
-                <input type="text" placeholder="请输入用户名" name="username">
+                <label>手机号：</label>
+                <input type="text" placeholder="请输入手机号" name="username">
+                <span>{{ mobile_error }}</span>
                 <br>
-                <label>密户码：</label>
+                <label>密码：</label>
                 <input type="password" placeholder="请输入密码" name="password">
+                <span>{{ pwd_error }}</span>
                 <br>
-                <input type="submit" value="登录/注册">
+                <button type="submit">登录注册</button>
             </form>
 
         </div>
 
 
     </div>
+</div>
 
 </body>
 </html>
