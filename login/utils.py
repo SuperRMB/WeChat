@@ -8,8 +8,8 @@ def is_legal_mobile(mobile):
     :param mobile:
     :return:
     '''
-
-    if len(mobile) == 11 and mobile.startswith("1"):
+    m = str(mobile)
+    if len(m) == 11 and m.startswith("1"):
         return True
     else:
         return False

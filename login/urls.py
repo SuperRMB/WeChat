@@ -1,7 +1,8 @@
 from django.urls import path
-from login.views import mobileVerification,login
+from . import views
 
 urlpatterns = [
-    path('',login),
-    path('mobile_verification/', mobileVerification),
+    path('',views.login),
+    path('legal/mobile/',views.mobile_legal),
+    path('mobile_verification/', views.mobileVerification),
 ]
