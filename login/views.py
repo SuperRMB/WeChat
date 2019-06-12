@@ -1,4 +1,6 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,render_to_response
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import LoginInfo
 from .utils import is_legal_mobile
 import json
@@ -24,7 +26,6 @@ def mobile_legal(requst):
     tip = {}
     if requst.method == 'GET':
         mobile = requst.GET['mobile']
-        print(">>>>:"+mobile)
         isLegal = is_legal_mobile(mobile)
         if isLegal:
             tip['msg'] = ''
@@ -55,7 +56,8 @@ def mobileVerification(request):
                 else:
                     error.clear()
                     error['pwd_error'] = '密码错误'
-                    return render(request, 'login.html', content=error)
+                    # return render(request, 'login.html', context=error)
+                    return HttpResponseRedirect(reverse('login:login_page'))
             else:#注册
                 info = LoginInfo(mobile=mobile,pwd=pwd)
                 info.save()
@@ -63,10 +65,10 @@ def mobileVerification(request):
         else:
             error.clear()
             error['mobile_error'] = '请输入正确的手机号'
-            return render(request, 'login.html', content=error)
+            return render(request, 'login.html', context=error)
     else:
         error.clear()
         error['mobile_error'] = '请输入正确的手机号'
-        return render(request,'login.html',content=error)
+        return render(request,'login.html',context=error)
 
 
