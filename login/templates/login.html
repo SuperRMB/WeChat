@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>登录</title>
+    <title>登录/注册</title>
     <link type="text/css" href="/static/css/login_page.css" rel="stylesheet">
 </head>
 <body>
@@ -29,42 +29,13 @@
 
         </div>
 
-
     </div>
 </div>
 
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script type="text/javascript">
-
-    var app = new Vue({
-        el:'#app',
-        data:{
-            inputVal:''
-        },
-        watch:{
-            inputVal:function (text) {
-                if (text.length == 0){
-                    document.getElementById('mobile_tip').innerText = ''
-                } else if (text.charAt(0) != '1' || text.length < 11){
-                    document.getElementById('mobile_tip').innerText = '手机号格式错误'
-                }else if (text.length == 11 && text.charAt(0) == '1'){
-                    document.getElementById('mobile_tip').innerText = ''
-                    axios.get('{% url "login:mobile_legal" %}',{
-                        params:{
-                            mobile:text
-                        }
-                    }).then(function (response) {
-                        var data = response.data
-                        document.getElementById('mobile_tip').innerText = data.msg
-                    });
-                }
-            }
-        }
-    })
-
-</script>
+<script src="/static/js/login_page.js"></script>
 
 </body>
 </html>

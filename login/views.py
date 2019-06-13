@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse
 from .models import LoginInfo
 from .utils import is_legal_mobile
 import json
@@ -26,7 +26,7 @@ def login(request):
             if info:  # 登录
                 info = LoginInfo.objects.get(mobile=mobile)
                 if info.pwd == pwd:
-                    return HttpResponse('登录成功')
+                    return HttpResponseRedirect(reverse('main:main_page'))
                 else:
                     error.clear()
                     error['pwd_error'] = '密码错误'
@@ -34,7 +34,7 @@ def login(request):
             else:  # 注册
                 info = LoginInfo(mobile=mobile, pwd=pwd)
                 info.save()
-                return HttpResponse('注册成功')
+                return HttpResponseRedirect(reverse('main:main_page'))
         else:
             error.clear()
             error['mobile_error'] = '请输入正确的手机号'
