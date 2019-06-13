@@ -14,7 +14,32 @@ def login(request):
     :param request:
     :return:
     '''
-    return render(request,'login.html')
+    error = {}
+    if request.method == 'GET':
+        return render(request,'login.html')
+    elif request.method == 'POST':
+        mobile = request.POST['mobile']
+        pwd = request.POST['pwd']
+        isLegal = is_legal_mobile(mobile)
+        if isLegal:
+            info = LoginInfo.objects.filter(mobile=mobile)
+            if info:  # 登录
+                info = LoginInfo.objects.get(mobile=mobile)
+                if info.pwd == pwd:
+                    return HttpResponse('登录成功')
+                else:
+                    error.clear()
+                    error['pwd_error'] = '密码错误'
+                    return render(request, 'login.html', context=error)
+            else:  # 注册
+                info = LoginInfo(mobile=mobile, pwd=pwd)
+                info.save()
+                return HttpResponse('注册成功')
+        else:
+            error.clear()
+            error['mobile_error'] = '请输入正确的手机号'
+            return render(request, 'login.html', context=error)
+
 
 
 def mobile_legal(requst):
@@ -32,43 +57,5 @@ def mobile_legal(requst):
         else:
             tip['msg'] = '手机号不合法'
         return HttpResponse(json.dumps(tip))
-
-
-def mobileVerification(request):
-    '''
-    验证手机号
-    验证手机号是否合法
-    验证手机号是否注册
-    :param request:
-    :return:
-    '''
-    error = {}
-    if request.method == 'POST':
-        mobile = request.POST['mobile']
-        pwd = request.POST['pwd']
-        isLegal = is_legal_mobile(mobile)
-        if isLegal:
-            info = LoginInfo.objects.filter(mobile=mobile)
-            if info:#登录
-                info = LoginInfo.objects.get(mobile=mobile)
-                if info.pwd == pwd:
-                    return HttpResponse('登录成功')
-                else:
-                    error.clear()
-                    error['pwd_error'] = '密码错误'
-                    # return render(request, 'login.html', context=error)
-                    return HttpResponseRedirect(reverse('login:login_page'))
-            else:#注册
-                info = LoginInfo(mobile=mobile,pwd=pwd)
-                info.save()
-                return HttpResponse('注册成功')
-        else:
-            error.clear()
-            error['mobile_error'] = '请输入正确的手机号'
-            return render(request, 'login.html', context=error)
-    else:
-        error.clear()
-        error['mobile_error'] = '请输入正确的手机号'
-        return render(request,'login.html',context=error)
 
 
