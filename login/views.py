@@ -1,11 +1,9 @@
-from django.shortcuts import render,HttpResponse,render_to_response
-from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.shortcuts import render,HttpResponse
 from .models import LoginInfo
 from .utils import is_legal_mobile
 import json
-# Create your views here.
 
+# Create your views here.
 
 
 def login(request):
@@ -16,6 +14,8 @@ def login(request):
     '''
     error = {}
     if request.method == 'GET':
+        error['mobile_error'] = ''
+        error['pwd_error'] = ''
         return render(request,'login.html')
     elif request.method == 'POST':
         mobile = request.POST['mobile']
