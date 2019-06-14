@@ -12,7 +12,9 @@ def main_page(request):
     if request.method == 'GET':
         return render(request,"main.html")
     elif request.method == 'POST':
-        form = UploadFileForm(request.POST,request.FILES)
-        if form.is_valid():
-            handle_uploaded_file(request.FILES['file'],request.POST['file'])
+        uploadFile = request.FILES['file']
+        handle_uploaded_file(uploadFile,uploadFile.name)
+
         return render(request, "main.html")
+
+
