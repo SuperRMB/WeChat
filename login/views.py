@@ -18,8 +18,8 @@ def login(request):
         error['pwd_error'] = ''
         return render(request,'login.html')
     elif request.method == 'POST':
-        mobile = request.POST['mobile']
-        pwd = request.POST['pwd']
+        mobile = request.POST.get('mobile')
+        pwd = request.POST.get('pwd')
         isLegal = is_legal_mobile(mobile)
         if isLegal:
             info = LoginInfo.objects.filter(mobile=mobile)
@@ -50,7 +50,7 @@ def mobile_legal(requst):
     '''
     tip = {}
     if requst.method == 'GET':
-        mobile = requst.GET['mobile']
+        mobile = requst.GET.get('mobile')
         isLegal = is_legal_mobile(mobile)
         if isLegal:
             tip['msg'] = ''
